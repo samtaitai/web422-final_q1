@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <form class="search-box">
+        <input
+          class="form-control"
+          type="text"
+          id="search-text"
+          name="searchText"
+          [(ngModel)]="searchText"
+          (ngModelChange)="searchText = $event"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </form>
+      <div>
+        <ul
+          class="list-group"
+          *ngIf="(items | filter : searchText).length > 0; else noResult"
+        >
+          <li
+            *ngFor="let item of items | filter : searchText"
+            class="list-group-item"
+          >
+            {{ item }}
+          </li>
+        </ul>
+        <ng-template #noResult>
+          <ul class="list-group">
+            <li class="list-group-item">No entries matching the input</li>
+          </ul>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>
